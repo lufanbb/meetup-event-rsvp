@@ -1,5 +1,4 @@
 import React from "react";
-import { config } from "../infrastructure/config";
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -12,20 +11,19 @@ const styles = (theme:any) => ({
   },
 });
 
-export const Authorization: React.FunctionComponent = (props: any) => {
+const Authorization: React.FunctionComponent = (props: any) => {
 
     const { classes } = props;
 
     const callBackURL: string = window.location.href;
-    const meetupClientId: string = config.meetupClientID;
+    const meetupClientId: string | undefined = process.env.MEETUP_CLINET_ID;
     const meetupURL: string = `https://secure.meetup.com/oauth2/authorize?client_id=${meetupClientId}&response_type=token&redirect_uri=${callBackURL}`;
   
     return (
-      <Button variant="contained" href={meetupURL} className={classes.button}>
-        Link
+      <Button variant="contained" color="secondary" href={meetupURL} className={classes.button}>
+        Authenticate with Meetup to see the events
       </Button>
     )
 }
-
 
 export default withStyles(styles)(Authorization);

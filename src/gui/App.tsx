@@ -1,13 +1,13 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { Authorization } from "./Authorization"
+import Authorization from "./Authorization"
 import { Event } from "./Event"
 
 const App: React.FC = () => {
 
-  //const urlParams = new URLSearchParams(window.location.hash.substr(1));
-  const accessToken: string | null = "de746c71717e568b17f4ea9f5f91e1f1";
+  const urlParams = new URLSearchParams(window.location.hash.substr(1));
+  const accessToken: string | null = urlParams.get("access_token");
 
   console.log(`window.location.search = ${window.location.search}`);
   console.log(`accessToken = ${accessToken}`);

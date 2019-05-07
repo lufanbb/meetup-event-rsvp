@@ -32,13 +32,12 @@ export const Event :React.FunctionComponent<Props> = (props: Props) => {
         }
         window.fetch(EventURL, options)
             .then(response => {
-                    if(response.ok) {
-                        return response.json()
-                    } else {
-                        throw new Error(`Error fetching evnets`);
-                    }
+                if(response.ok) {
+                    return response.json()
+                } else {
+                    throw new Error(`Error fetching evnets`);
                 }
-            )
+            })
             .then(events => {
                 console.log(JSON.stringify(events))
                 return setEvents(events)
@@ -47,7 +46,9 @@ export const Event :React.FunctionComponent<Props> = (props: Props) => {
 
     return (
         <div>
-            {events}
+            <p>
+                {JSON.stringify(events)}
+            </p>
         </div>
     )
 }
