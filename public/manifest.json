@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Evnet RSVP",
+  "name": "Meetup Event React JS Dallas RSVP",
   "icons": [
     {
       "src": "favicon.ico",

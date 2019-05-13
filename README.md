@@ -1,5 +1,5 @@
 ## To access the public deployed version
-1. First you need to install [Allow-Control-Allow-Origin](https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi?hl=en) chrome plugin and enable it.
+1. First you need to install [Allow-Control-Allow-Origin](https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi?hl=en) chrome plugin and enable it in your Chrome browser.
 2. Go to [Meetup Event RSVP](https://meetup-event-rsvp.netlify.com/) site and login with your Meetup account to get access token.
 3. You should be able to see the list of Events and click on any one to expand it and reveal more details.
 ## Thought process and progress for this project
@@ -9,20 +9,20 @@
 4. Since we talked about Material-UI on the phone and I haven't used it before, this also seems like a great opportunity to try it out.
 5. Since I am not a Meetup Pro user, I can not user the server auth flow, but with client side implicit flow I am facing CORS issue where it stops me from being redirected with access token and fetch the events. I have to install [Allow-Control-Allow-Origin](https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi?hl=en) in chrome to make it work. It should not be a problem if I get the access tokena and fetch data in backend service but for now that's the only option I found.
 6. For security reason, I didn't check in my config file where it stores the meetupClientId. If you want to run this project locally. Please add config.ts to /src/infrastructure/ and add content below to that file and replace the *Your Meetup Client ID*
-```Typescript
-export const config = {
-    meetupClientID: "Your Meetup Client ID"
-}
-```
+    ```Typescript
+    export const config = {
+        meetupClientID: "Your Meetup Client ID"
+    }
+    ```
 7. Here are the progress log and I personally find it is interesting to work through all the issues I encounter.
     
     | Date            | Progress     |
     | :-------------: |:-------------|
-    | 5-05      | Started the project and based of the requirements, seems like pretty easy, get the data from Meetup API and display it. Oh wait, I need to register Meetup API consumer first to user the API? All right, read docs, not a pro user, have to user implicit flow which means browser only. OK... That's enough information for tonight. Need to think about how to approache it.|
-    | 5-07      | Got some time tonight, let's do this! Register OAuth2 consumer and get access token to request the API. Yey! Oh wait? What is this? CORS issue... ok... Google it. Install a plugin to bypass the CORS check in chrome. Finally it works! with some hacking... |
-    | 5-08~5-11 | Going out of town, not much progress.      |
+    | 5-05      | Started the project and based on the requirements, get the data from Meetup API and display it, shouldn't be too hard. Oh wait, I need to register Meetup API consumer first to user the API? All right, read docs, not a pro user, have to user implicit flow which means browser only. OK... That's enough information for tonight. Need to think about how to approache it. |
+    | 5-07      | Got some time tonight, let's do this! Register OAuth2 consumer and get access token to request the API. Yey! Oh wait! What is this? CORS... ok... Google it. Install a plugin to bypass the CORS check in Chrome. Finally it works! with some hacking... |
+    | 5-08~5-11 | Going out of town, not much progress. |
     | 5-12      | Alright, I am back in the game. Looking throught the Demo and API for Material-UI component and put together all the information I care about for a Meetup event with it. |
-    | 5-13      | Documenting my thought process and why I choose what's in the project      |
+    | 5-13      | Documenting my thought process and why I choose certain thing for this project. |
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
