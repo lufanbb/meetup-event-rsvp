@@ -7,23 +7,20 @@ type Props = {
     accessToken: string
 }
 
-
 export const Events :React.FunctionComponent<Props> = (props: Props) => {
 
     const [events, setEvents] = useState<MeetupEvent[]>([]);
     const [expanded, setExpanded] = useState<string | null>(null);
 
-    const handleChange = (eventid: string) => (event: any, expanded: boolean) => {
-        setExpanded(expanded? eventid : null);
-    }
+    const handleChange = (eventId: string) => (event: any, expanded: boolean) => setExpanded(expanded? eventId : null)
+    
 
     useEffect(() => {
         MeetupAPIClient.of(props.accessToken)
             .getEvents()
-            .then(events => {
-                console.log(JSON.stringify(events))
-                return setEvents(events? events : [])
-            });
+            .then((events: MeetupEvent[]) => 
+                setEvents(events? events : [])
+            );
     }, [props.accessToken]);
 
     return (
@@ -32,10 +29,10 @@ export const Events :React.FunctionComponent<Props> = (props: Props) => {
                 events.map(
                     (event: MeetupEvent) => 
                         <Event key={event.id} 
-                               accessToken={props.accessToken} 
-                               event={event} 
-                               expanded={expanded} 
-                               onChange={handleChange}>
+                            accessToken={props.accessToken} 
+                            event={event} 
+                            expanded={expanded} 
+                            onChange={handleChange}>
                         </Event>
                     )
             }

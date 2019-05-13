@@ -29,11 +29,12 @@ export class MeetupAPIClient {
                 if(response.ok) {
                     return response.json()
                 } else {
-                    throw new Error(`Error fetching evnets`);
+                    throw new Error(`Error fetching evnets: ${response.statusText}`);
                 }
             }).catch(error => {
                 console.error(error);
-            })
+            }
+        );
     }
 
     getRSVPs(eventId: string): PromiseLike<RSVP[]> {
@@ -42,10 +43,11 @@ export class MeetupAPIClient {
                 if(response.ok) {
                     return response.json()
                 } else {
-                    throw new Error(`Error fetching RSVPs`);
+                    throw new Error(`Error fetching RSVPs: ${response.statusText}`);
                 }
             }).catch(error => {
                 console.error(error);
-            })
+            }
+        );
     }
 }

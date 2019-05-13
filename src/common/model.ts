@@ -1,5 +1,3 @@
-import { MemberExpression } from "@babel/types";
-
 export interface Event {
     id: string;
     name: string;

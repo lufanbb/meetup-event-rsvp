@@ -1,18 +1,17 @@
 import React from "react";
 import Button from '@material-ui/core/Button';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, WithStyles } from '@material-ui/core/styles';
 import { config } from "../infrastructure/config"
 
 const styles = (theme:any) => ({
   button: {
     margin: theme.spacing.unit,
   },
-  input: {
-    display: 'none',
-  },
 });
 
-const Authorization: React.FunctionComponent = (props: any) => {
+interface Props extends WithStyles<typeof styles> {}
+
+const Authorization: React.FunctionComponent<Props> = (props: Props) => {
 
     const { classes } = props;
 

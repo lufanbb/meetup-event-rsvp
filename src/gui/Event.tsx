@@ -1,16 +1,10 @@
 import React from "react";
-import {Event as MeetupEvent} from "../common/model";
-import { Card, CardContent, Divider, ExpansionPanel, ExpansionPanelDetails, ExpansionPanelSummary, Typography, withStyles, WithStyles } from "@material-ui/core";
+import { Event as MeetupEvent } from "../common/model";
+import { Card, CardContent, Divider, ExpansionPanel, ExpansionPanelDetails, ExpansionPanelSummary, Grid, Typography, withStyles, WithStyles } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import RSVPs from "./RSVPs";
-import { FlexDirectionProperty } from "csstype";
-
-const FLEX_ROW: FlexDirectionProperty = "row";
 
 const styles = (theme: any) => ({
-    root: {
-      width: '100%',
-    },
     heading: {
       fontSize: theme.typography.pxToRem(15),
       flexBasis: '33.33%',
@@ -18,42 +12,6 @@ const styles = (theme: any) => ({
     secondaryHeading: {
       fontSize: theme.typography.pxToRem(15),
       color: theme.palette.text.secondary,
-    },
-    icon: {
-      verticalAlign: 'bottom',
-      height: 20,
-      width: 20,
-    },
-    details: {
-      alignItems: 'center',
-    },
-    column70: {
-      flexBasis: '70%',
-    },
-    column30: {
-      flexBasis: '30%',
-    },
-    helper: {
-      borderLeft: `2px solid ${theme.palette.divider}`,
-      padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`,
-    },
-    link: {
-      color: theme.palette.primary.main,
-      textDecoration: 'none',
-      '&:hover': {
-        textDecoration: 'underline',
-      },
-    },
-    title: {
-        fontSize: 14,
-    },
-    pos: {
-        marginBottom: 12,
-    },
-    cardContent: {
-        display: "flex",
-        flexDirection: FLEX_ROW,
-        justifyContent: 'space-evenly'
     },
   });
 
@@ -75,24 +33,43 @@ const Event: React.FunctionComponent<Props> = (props: Props) => {
             <Typography className={classes.secondaryHeading}>{`Time: ${props.event.local_date} - ${props.event.local_time}`}</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
-                <Typography className={classes.column70} variant="body1" align="left" dangerouslySetInnerHTML={{__html: props.event.description}}>
-                </Typography>
-                <Card className={classes.column30}>
-                    <CardContent >
-                        <div> className={classes.cardContent}
-                            <div className={classes.pos}>
-                                <Typography variant="h5" component="h2">
-                                    Venue: {props.event.venue.name}
-                                </Typography>
-                                <Typography variant="h5" component="h2">
-                                    {`${props.event.venue.address_1}, ${props.event.venue.city}, ${props.event.venue.state}, ${props.event.venue.zip}`}
-                                </Typography>
-                            </div>
-                            <Divider/>
-                            <RSVPs accessToken={props.accessToken} eventId={props.event.id}></RSVPs>
-                        </div>
-                    </CardContent>
+            {/* Meetup event API return event description as HTML, so need to use "dangerouslySetInnerHTML to display it as HTML*/}
+            <Grid container spacing={24}>
+
+              <Grid item xs={8}>
+                <Card>
+                  <CardContent >
+                    <Typography variant="body1" align="left" dangerouslySetInnerHTML={{__html: props.event.description}}>
+                    </Typography>
+                  </CardContent>
                 </Card>
+              </Grid>
+              
+              <Grid item xs={4}>
+                <Grid container spacing={24}>
+                  <Grid item xs={12}>
+                    <Card >
+                      <CardContent >
+                        <Typography variant="h5" component="h2">
+                            Venue: {props.event.venue.name}
+                        </Typography>
+                        <Typography variant="h5" component="h2">
+                            {`${props.event.venue.address_1}, ${props.event.venue.city}, ${props.event.venue.state}, ${props.event.venue.zip}`}
+                        </Typography>
+                      </CardContent>
+                    </Card>
+                  </Grid>
+                  <Divider/>
+                  <Grid item xs={12}>
+                    <Card >
+                      <CardContent >
+                        <RSVPs accessToken={props.accessToken} eventId={props.event.id}></RSVPs>
+                      </CardContent>
+                    </Card>
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
           </ExpansionPanelDetails>
         </ExpansionPanel>
     )

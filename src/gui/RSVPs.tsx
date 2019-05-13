@@ -7,10 +7,6 @@ const styles = (theme: any) => ({
   root: {
     display: 'flex',
     justifyContent: 'space-evenly',
-    marginTop: '30px',
-  },
-  chip: {
-    margin: theme.spacing.unit,
   },
 });
 
@@ -35,22 +31,21 @@ const RSVPs :React.FunctionComponent<Props> = (props: Props) => {
 
     const [ rsvps, setRsvps ] = useState<RSVP[]>([]);
 
-    const [yesCount, setYesCount] = useState<number>(0);
-    const [noCount, setNoCount] = useState<number>(0);
-    const [waitlistCount, setWaitlistCount] = useState<number>(0);
+    const [ yesCount, setYesCount ] = useState<number>(0);
+    const [ noCount, setNoCount ] = useState<number>(0);
+    const [ waitlistCount, setWaitlistCount ] = useState<number>(0);
 
     useEffect(() => {
       MeetupAPIClient.of(props.accessToken)
         .getRSVPs(props.eventId)
         .then((rsvps: RSVP[]) => {
-            console.log("All RSVPs" + JSON.stringify(rsvps))
             const yesRSVPs = getCountByResponse("yes", rsvps);
             const noRSVPs = getCountByResponse("no", rsvps);
             const waitlistRSVPs = getCountByResponse("waitlist", rsvps);
             setYesCount(yesRSVPs);
             setNoCount(noRSVPs);
             setWaitlistCount(waitlistRSVPs);
-            return setRsvps(rsvps);
+            return setRsvps(rsvps? rsvps : []);
         });
     }, [props.accessToken]);
 
