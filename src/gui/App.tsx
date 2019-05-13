@@ -6,8 +6,8 @@ import { Events } from "./Events"
 
 const App: React.FC = () => {
 
-  //const urlParams = new URLSearchParams(window.location.hash.substr(1));
-  const accessToken: string | null = "049652ce24c51016a46bfac6cdf4ad9f";
+  const urlParams = new URLSearchParams(window.location.hash.substr(1));
+  const accessToken: string | null = urlParams.get("access_token");
 
   console.log(`window.location.search = ${window.location.search}`);
   console.log(`accessToken = ${accessToken}`);
