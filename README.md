@@ -1,13 +1,12 @@
 ## To access the public deployed version
-1. First you need to install [Allow-Control-Allow-Origin](https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi?hl=en) chrome plugin and enable it in your Chrome browser.
-2. Go to [Meetup Event RSVP](https://meetup-event-rsvp.netlify.com/) site and login with your Meetup account to get access token.
-3. You should be able to see the list of Events and click on any one to expand it and reveal more details.
+1. Go to [Meetup Event RSVP](https://meetup-event-rsvp.netlify.com/) site and login with your Meetup account to get access token.
+2. You should be able to see the list of Events and click on any one to expand it and reveal more details.
 ## Thought process and progress for this project
 1. I am using [Create React App](https://github.com/facebook/create-react-app) to bootstrap this project since that is quick and easy. Setup webpack could take quite sometime and I assume that is not the major concern of this project.
 2. I am also bringing Typescript into the project, even if I am the only one developing it, it could greatly help me to understand the intention as well couple month later when I completely forgot the details of this project.
 3. I know the requirement says need to demonstrate React life cycle methods, but I always want to try React Hook since it came out and this seems like a good opportunity to do it. I will see where I can get with React Hook and add life cycle methods where needed.
 4. Since we talked about Material-UI on the phone and I haven't used it before, this also seems like a great opportunity to try it out.
-5. Since I am not a Meetup Pro user, I can not user the server auth flow, but with client side implicit flow I am facing CORS issue where it stops me from being redirected with access token and fetch the events. I have to install [Allow-Control-Allow-Origin](https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi?hl=en) in chrome to make it work. It should not be a problem if I get the access tokena and fetch data in backend service but for now that's the only option I found.
+5. CORS issue solved. But to deploy it locally, I have to install [Allow-Control-Allow-Origin](https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi?hl=en) in chrome to make it work.
 6. For security reason, I didn't check in my config file where it stores the meetupClientId. If you want to run this project locally. Please add config.ts to /src/infrastructure/ and add content below to that file and replace the *Your Meetup Client ID*
     ```Typescript
     export const config = {

@@ -1,8 +1,12 @@
 import {Event, RSVP} from "../common/model";
 
 const CORS: RequestMode = "cors";
-const EventURL = `https://api.meetup.com/reactjs-dallas/events`;
-const RSVPURL = (eventId: string) => `https://api.meetup.com/reactjs-dallas/events/${eventId}/rsvps`;
+const EventURL = (accessToken: string) => `https://api.meetup.com/reactjs-dallas/events?access_token=${accessToken}`;
+const RSVPURL = (accessToken: string, eventId: string) => `https://api.meetup.com/reactjs-dallas/events/${eventId}/rsvps?access_token=${accessToken}`;
+const OPTIONS = {
+    method: "GET",
+    mode: CORS
+}
 
 export class MeetupAPIClient {
 
@@ -12,19 +16,12 @@ export class MeetupAPIClient {
 
     private constructor(private accessToken: string) {}
 
-    private options = (accessToken: string) => { 
-        return {
-            method: "GET",
-            mode: CORS,
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${accessToken}`
-            }
-        } 
+    private options = () => { 
+        return 
     }
 
     getEvents(): PromiseLike<Event[]> {
-        return window.fetch(EventURL, this.options(this.accessToken))
+        return window.fetch(EventURL(this.accessToken), OPTIONS)
             .then(response => {
                 if(response.ok) {
                     return response.json()
@@ -38,7 +35,7 @@ export class MeetupAPIClient {
     }
 
     getRSVPs(eventId: string): PromiseLike<RSVP[]> {
-        return window.fetch(RSVPURL(eventId), this.options(this.accessToken))
+        return window.fetch(RSVPURL(this.accessToken,eventId), OPTIONS)
             .then(response => {
                 if(response.ok) {
                     return response.json()

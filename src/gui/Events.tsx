@@ -25,15 +25,6 @@ export const Events :React.FunctionComponent<Props> = (props: Props) => {
 
     return (
         <div>
-            <div>
-                <p>
-                    If you can not see the events after login with your Meetup account and allow access.
-                    <br/>
-                    Please install 
-                    <a href="https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi?hl=en"> Allow-Control-Allow-Origin </a> 
-                    and enable it for chrome plugin.
-                </p>
-            </div>
             {
                 events.map(
                     (event: MeetupEvent) => 
